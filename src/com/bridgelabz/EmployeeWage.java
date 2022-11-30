@@ -2,24 +2,21 @@ package com.bridgelabz;
 
 public class EmployeeWage {
     /**
-     * Using Static Variable and finale keyword for fixed hours
+     * Using Static And final keyword for fixed hours for part-time and full-time
      */
     static final int Total_Working_Hours = 100;
     static final int WAGE_PER_HOUR = 20;
     static final int FULL_TIME_HOUR = 8;
-    static final int PART_TIME_HOUR = 8;
+    static final int PART_TIME_HOUR = 4;
     static final int IS_FULL_TIME = 2;
     static final int IS_PART_TIME = 1;
     static final int WORKING_DAYS_PER_MONTH = 20;
 
     /**
-     * This Main Method is Using For Calculate total working hours in month
-     *
+     * This Static Method is Using For Calculate the Monthly Total working hours
      */
 
-    public static void main(String[] args) {
-
-        System.out.println("Welcome to Employee Wage");
+    static void employeeWage(){
         int day = 1;
         int totalWorkingHours = 0;
         int totalWage = 0;
@@ -49,4 +46,17 @@ public class EmployeeWage {
         System.out.println("Total Wage" +totalWage);
         System.out.println("Total Working Hours "+totalWorkingHours);
     }
+
+    /**
+     *This is Main Method is Used for calling the employeeWage Static method
+     *
+     */
+
+    public static void main(String[] args) {
+
+        System.out.println("Welcome to Employee Wage");
+        employeeWage();
+
+    }
+
 }
