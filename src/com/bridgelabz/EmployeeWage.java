@@ -3,34 +3,39 @@ package com.bridgelabz;
 public class EmployeeWage {
 
     /**
-     * This Method is Used For Check The Attendance Of Employees and add Partime Wage
+     * Using Static Variables for calculate the full time and  part time wage
      */
-    private static void checkEmployeePresentOrAbsent() {
-        int empWagePerHour = 20;
-        int fullDayHour = 8;
-        int halfDayHour = 4;
-        int partTimeHour = 2;
-        int fullTime = 1;
-        int employeecheck = (int) Math.floor(Math.random() * 10) % 3;
-        if (employeecheck == fullTime) {
-            System.out.println("Employee is Present");
-            int dailyWage = empWagePerHour * fullDayHour;
-            System.out.println("Daily Wage of Employee is" + dailyWage);
-            System.out.println("Daily Wage of Employee in Full Time is" + dailyWage);
-        } else if (employeecheck == partTimeHour) {
-            int partTimeWage = empWagePerHour * halfDayHour;
-            System.out.println("Daily Wage of Employee in Part Time is" + partTimeWage);
-        } else {
-            System.out.println("Employee is Absent");
-            System.out.println("Employee is Absent so Daily Wage is 0");
 
-        }
-    }
+        static final int WAGE_PER_HOUR=20;
+        static final int FULL_TIME_HOUR=8;
+        static final int PART_TIME_HOUR = 8;
+        static final int IS_FULL_TIME = 2;
+        static final int IS_PART_TIME = 1;
     /**
      * This Main Method is Used For Calling The Method checkEmployeePresentOrAbsent
      */
-    public static void main(String[] args) {
-         checkEmployeePresentOrAbsent();
+        public static void main(String[] args) {
 
+            System.out.println("Welcome to Employee Wage");
+            int dailyWage = 0;
+            int empCheck = (int) Math.floor(Math.random() * 10) % 3;
+
+            switch  (empCheck){
+                case IS_FULL_TIME:
+                    System.out.println("Employee FULL TIME");
+                    dailyWage = WAGE_PER_HOUR * FULL_TIME_HOUR;
+                    break;
+                case IS_PART_TIME:
+                    System.out.println("Employee PART TIME");
+                    dailyWage = WAGE_PER_HOUR * PART_TIME_HOUR;
+                    break;
+                default:
+                    System.out.println("Employee Absent");
+
+            }
+
+
+            System.out.println("Daily Wage => " + dailyWage);
+        }
     }
-    }
+
