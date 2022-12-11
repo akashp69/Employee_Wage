@@ -1,19 +1,26 @@
 package com.bridgelabz;
-   /**
-    * Create a class for manage the wages for multiple companies
-    */
+/**
+ *Ability to manage Employee wage of multiple companies using Interface approach.
+ */
+interface IEmployeeWageComputation {
+    public void addCompany(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs);
+
+    public void calculateTotalWage();
+}
+
 class CompanyEmpWage {
     /**
-     *   Using instance and final keyword for fixed hours
+     * Using the static and final keyword for fixed time
      */
     final String COMPANY_NAME;
     final int WAGE_PER_HR;
     final int MAX_WORKING_DAYS;
     final int MAX_WORKING_HRS;
-    int totalEmpWage;
     /**
-     * Using Non-static methods for calculate the employee wage for multiple comapny
-     **/
+     * Using instances variables for calculate the total wages of diffrent companies
+     */
+    int totalEmpWage;
+
     CompanyEmpWage(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs) {
         COMPANY_NAME = companyName;
         WAGE_PER_HR = wagePerHr;
@@ -21,34 +28,30 @@ class CompanyEmpWage {
         MAX_WORKING_HRS = maxWorkingHrs;
         totalEmpWage = 0;
     }
+
     void setTotalEmployeeWage(int totalEmpWage) {
         this.totalEmpWage = totalEmpWage;
     }
 
+    @Override
     public String toString() {
         System.out.println("Details of " + COMPANY_NAME + " employee");
         System.out.println("-----------------------------------------------------");
-        System.out.println("Wage per hour:" + WAGE_PER_HR);
+        System.err.println("Wage per hour:" + WAGE_PER_HR);
         System.out.println("Maximum working days:" + MAX_WORKING_DAYS);
         System.out.println("Maximum working hours:" + MAX_WORKING_HRS);
         return "Total wage for a month of " + COMPANY_NAME + " employee is " + totalEmpWage + "\n";
     }
 }
 
-public class EmployeeWage {
-    /**
-     * Using the static and final keyword for fixed hours
-     */
+public class EmployeeWage implements IEmployeeWageComputation {
+
     public static final int PART_TIME = 1;
     public static final int FULL_TIME = 2;
     /**
      * Using instances variables for multiple companies
      */
     int noOfCompanies, index;
-    /**
-     * Using instances variables for calculate the total wages of diffrent companies
-     * Using Array
-     */
     CompanyEmpWage[] companies;
 
     public EmployeeWage(int noOfCompanies) {
@@ -57,7 +60,7 @@ public class EmployeeWage {
         index = 0;
     }
 
-    void addCompany(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs) {
+    public void addCompany(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs) {
         companies[index++] = new CompanyEmpWage(companyName, wagePerHr, maxWorkingDays, maxWorkingHrs);
     }
     /**
@@ -66,9 +69,7 @@ public class EmployeeWage {
     int generateEmployeeType() {
         return (int) (Math.random() * 100) % 3;
     }
-    /**
-     * Using non-static method for calculate the working hours of  different companies employes
-     */
+
     int getWorkingHrs(int empType) {
         switch (empType) {
             case FULL_TIME:
@@ -79,10 +80,8 @@ public class EmployeeWage {
                 return 0;
         }
     }
-    /**
-     * Using non-static method for calculate total wage for different companies employees
-     */
-    void calculateTotalWage() {
+
+    public void calculateTotalWage() {
         for (CompanyEmpWage company : companies) {
             int totalWage = calculateTotalWage(company);
             company.setTotalEmployeeWage(totalWage);
@@ -111,12 +110,14 @@ public class EmployeeWage {
     /**
      * This is a Main Method is using for calling the methods
      */
+
     public static void main(String args[]) {
         EmployeeWage manageWageMultipleCompanies = new EmployeeWage(3);
-        manageWageMultipleCompanies.addCompany("SBI", 4, 30, 100);
-        manageWageMultipleCompanies.addCompany("AXIS", 5, 40, 170);
-        manageWageMultipleCompanies.addCompany("ICICI", 9, 10, 70);
+        manageWageMultipleCompanies.addCompany("BOI", 6, 24, 100);
+        manageWageMultipleCompanies.addCompany("HDFC", 8, 20, 120);
+        manageWageMultipleCompanies.addCompany("PNB", 7, 22, 110);
         manageWageMultipleCompanies.calculateTotalWage();
     }
+
 }
 
